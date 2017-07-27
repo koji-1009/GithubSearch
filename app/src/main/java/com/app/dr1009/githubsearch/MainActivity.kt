@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity() {
                         mCardList.add(card)
                         mBinding.recycler.adapter.notifyItemInserted(index)
                     }
-                    mBinding.recycler.adapter.notifyDataSetChanged()
                 }, { e ->
                     Log.d(TAG, "error", e)
                 }, {
