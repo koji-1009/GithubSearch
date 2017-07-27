@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.ArrayAdapter
 import com.app.dr1009.githubsearch.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import io.reactivex.Observable
@@ -11,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.Request
+
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -28,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         mBinding.params = SearchParams()
 
         mBinding.recycler.adapter = mAdapter
+
+        val autoCompleteAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_dropdown_item_1line, resources.getStringArray(R.array.language))
+        mBinding.editLang.setAdapter(autoCompleteAdapter)
     }
 
     fun onClickSearch(urlParams: String) {

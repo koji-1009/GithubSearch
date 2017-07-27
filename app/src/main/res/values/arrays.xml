@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language" translatable="false">
+        <item>Any Language</item>
+        <item>C</item>
+        <item>C#</item>
+        <item>C++</item>
+        <item>Clojure</item>
+        <item>CoffeeScript</item>
+        <item>CSS</item>
+        <item>Go</item>
+        <item>Haskell</item>
+        <item>HTML</item>
+        <item>Kotlin</item>
+        <item>Java</item>
+        <item>JavaScript</item>
+        <item>Lua</item>
+        <item>Matlab</item>
+        <item>Objective-C</item>
+        <item>Peal</item>
+        <item>PHP</item>
+        <item>Python</item>
+        <item>R</item>
+        <item>Ruby</item>
+        <item>Scala</item>
+        <item>Shell</item>
+        <item>Swift</item>
+        <item>TeX</item>
+        <item>TypeScript</item>
+        <item>VimL</item>
+    </string-array>
+</resources>
