@@ -14,12 +14,11 @@ import okhttp3.Request
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
-    private val BASE_URL = "https://api.github.com/search/repositories?"
     private val OKHTTP_CLIENT = OkHttpClient.Builder().build()
 
     private lateinit var mBinding: ActivityMainBinding
-    private val mData = mutableListOf<Card>()
-    private val mAdapter = RecyclerAdapter(mData)
+    private val mCardList = mutableListOf<Card>()
+    private val mAdapter = RecyclerAdapter(mCardList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +32,11 @@ class MainActivity : AppCompatActivity() {
 
     fun onClickSearch(urlParams: String) {
         mBinding.buttonSearch.isEnabled = false
-        mData.clear()
+        mCardList.clear()
         mBinding.recycler.adapter.notifyDataSetChanged()
         mBinding.executePendingBindings()
 
-        val url = BASE_URL + urlParams
+        val url = resources.getString(R.string.base_url) + urlParams
         Observable
                 .create<GithubJsonModel> {
                     val request = Request.Builder()
@@ -47,20 +46,22 @@ class MainActivity : AppCompatActivity() {
                     val response = OKHTTP_CLIENT.newCall(request).execute()
                     val model = Gson().fromJson(response.body()?.string(), GithubJsonModel::class.java)
                     it.onNext(model)
+                    it.onComplete()
                 }
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    it.items.forEach { item ->
+                .subscribe({ model ->
+                    model.items.forEachIndexed { index, item ->
                         val card = Card(item)
-                        mData.add(card)
+                        mCardList.add(card)
+                        mBinding.recycler.adapter.notifyItemInserted(index)
                     }
                     mBinding.recycler.adapter.notifyDataSetChanged()
-                    mBinding.buttonSearch.isEnabled = true
-                    mBinding.executePendingBindings()
                 }, { e ->
                     Log.d(TAG, "error", e)
+                }, {
                     mBinding.buttonSearch.isEnabled = true
+                    mBinding.executePendingBindings()
                 })
     }
 }

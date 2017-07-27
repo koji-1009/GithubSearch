@@ -11,6 +11,7 @@ class SearchParams : BaseObservable() {
             field = query
             notifyPropertyChanged(com.app.dr1009.githubsearch.BR.query)
         }
+
     @get:Bindable
     var language = ""
         set(language) {
