@@ -1,9 +1,8 @@
 package com.app.dr1009.githubsearch
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
-class JsonModel {
+class GithubJsonModel {
 
     /**
      * @see #documantation_url
@@ -21,11 +20,7 @@ class JsonModel {
     @SerializedName("incomplete_results")
     val isIncompleteResults: Boolean = false
     @SerializedName("items")
-    val items: List<Items>
-
-    init {
-        items = ArrayList<Items>()
-    }
+    val items = listOf<Items>()
 
     inner class Items {
         @SerializedName("id")
@@ -35,7 +30,7 @@ class JsonModel {
         @SerializedName("full_name")
         val fullName: String? = null
         @SerializedName("owner")
-        val owner: Owner
+        val owner: Owner = Owner()
         @SerializedName("private")
         val isPrivate: Boolean = false
         @SerializedName("html_url")
@@ -166,11 +161,6 @@ class JsonModel {
         val defaultBranch: String? = null
         @SerializedName("score")
         val score: Double = 0.toDouble()
-
-        init {
-            owner = Owner()
-        }
-
     }
 
     inner class Owner {

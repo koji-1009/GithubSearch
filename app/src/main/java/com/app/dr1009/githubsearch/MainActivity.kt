@@ -39,13 +39,13 @@ class MainActivity : AppCompatActivity() {
 
         val url = BASE_URL + urlParams
         Observable
-                .create<JsonModel> {
+                .create<GithubJsonModel> {
                     val request = Request.Builder()
                             .url(url)
                             .get()
                             .build()
                     val response = OKHTTP_CLIENT.newCall(request).execute()
-                    val model = Gson().fromJson(response.body()?.string(), JsonModel::class.java)
+                    val model = Gson().fromJson(response.body()?.string(), GithubJsonModel::class.java)
                     it.onNext(model)
                 }
                 .subscribeOn(Schedulers.newThread())
