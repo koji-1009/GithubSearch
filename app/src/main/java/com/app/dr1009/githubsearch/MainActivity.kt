@@ -1,9 +1,11 @@
 package com.app.dr1009.githubsearch
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import com.app.dr1009.githubsearch.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
 
-        mBinding.buttonSearch.setOnClickListener { _ -> onClickSearch(mBinding.params.pramsUrl) }
+        mBinding.buttonSearch.setOnClickListener { _ -> onClickSearch() }
         mBinding.params = SearchParams()
 
         mBinding.recycler.adapter = mAdapter
@@ -35,13 +37,13 @@ class MainActivity : AppCompatActivity() {
         mBinding.editLang.setAdapter(autoCompleteAdapter)
     }
 
-    fun onClickSearch(urlParams: String) {
+    fun onClickSearch() {
         mBinding.buttonSearch.isEnabled = false
         mCardList.clear()
         mBinding.recycler.adapter.notifyDataSetChanged()
         mBinding.executePendingBindings()
 
-        val url = resources.getString(R.string.base_url) + urlParams
+        val url = resources.getString(R.string.base_url) + mBinding.params.searchUrl
         Observable
                 .create<GithubJsonModel> {
                     val request = Request.Builder()
@@ -67,5 +69,11 @@ class MainActivity : AppCompatActivity() {
                     mBinding.buttonSearch.isEnabled = true
                     mBinding.executePendingBindings()
                 })
+    }
+
+    fun onClickLegal(view: View) {
+        val context = view.context
+        val intent = Intent(context, LegalActivity::class.java)
+        context.startActivity(intent)
     }
 }

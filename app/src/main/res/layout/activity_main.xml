@@ -52,11 +52,21 @@
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             app:layoutManager="LinearLayoutManager"
             android:layout_below="@+id/edit_query"
+            android:layout_above="@+id/button"
             tools:listitem="@layout/layout_card" />
+
+        <Button
+            android:id="@+id/button"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="onClickLegal"
+            android:text="@string/button_legal" />
     </RelativeLayout>
 </layout>
 

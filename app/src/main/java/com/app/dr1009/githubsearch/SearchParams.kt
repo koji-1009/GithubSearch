@@ -9,23 +9,23 @@ class SearchParams : BaseObservable() {
     var query = ""
         set(query) {
             field = query
-            notifyPropertyChanged(com.app.dr1009.githubsearch.BR.query)
+            notifyPropertyChanged(BR.query)
         }
 
     @get:Bindable
     var language = ""
         set(language) {
             field = language
-            notifyPropertyChanged(com.app.dr1009.githubsearch.BR.language)
+            notifyPropertyChanged(BR.language)
         }
 
-    val pramsUrl: String
+    val searchUrl: String
         @Bindable
         get() {
             return "q=" + query + if (!TextUtils.isEmpty(language)) {
                 "+language:" + language
             } else {
                 ""
-            }
+            } + "&per_page=100"
         }
 }

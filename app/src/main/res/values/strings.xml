@@ -3,4 +3,5 @@
     <string name="app_name">GithubSearch</string>
     <string name="query">Query</string>
     <string name="language">Language</string>
+    <string name="button_legal">legal</string>
 </resources>
