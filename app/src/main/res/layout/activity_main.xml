@@ -8,6 +8,13 @@
         <variable
             name="params"
             type="com.app.dr1009.githubsearch.SearchParams" />
+
+        <variable
+            name="state"
+            type="com.app.dr1009.githubsearch.MainActivity.State" />
+
+        <import type="android.view.View"/>
+
     </data>
 
     <RelativeLayout
@@ -57,6 +64,16 @@
             android:layout_below="@+id/edit_query"
             android:layout_above="@+id/button"
             tools:listitem="@layout/layout_card" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button"
+            android:layout_below="@+id/edit_query"
+            android:visibility="@{state == state.Fetching ? View.VISIBLE : View.GONE}"/>
 
         <Button
             android:id="@+id/button"
