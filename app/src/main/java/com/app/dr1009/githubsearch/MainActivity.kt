@@ -26,11 +26,11 @@ class MainActivity : AppCompatActivity() {
         FailureFetch
     }
 
-    interface StateObserver {
+    interface StateObserverImpl {
         fun update(state: State)
     }
 
-    inner class NeverFetchedState : StateObserver {
+    inner class NeverFetchedState : StateObserverImpl {
         override fun update(state: State) {
             if (state != State.NeverFetched) {
                 return
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inner class FetchingState : StateObserver {
+    inner class FetchingState : StateObserverImpl {
         override fun update(state: State) {
             if (state != State.Fetching) {
                 return
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inner class SuccessFetchState : StateObserver {
+    inner class SuccessFetchState : StateObserverImpl {
         override fun update(state: State) {
             if (state != State.SuccessFetch) {
                 return
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inner class FailureFetchState : StateObserver {
+    inner class FailureFetchState : StateObserverImpl {
         override fun update(state: State) {
             if (state != State.FailureFetch) {
                 return
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private val mCardList = mutableListOf<Card>()
     private val mAdapter = RecyclerAdapter(mCardList)
-    var mStateObserverList = ArrayList<StateObserver>()
+    var mStateObserverList = ArrayList<StateObserverImpl>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
